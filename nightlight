@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Function to adjust color temperature to remove blue light and add red
+adjust_color_temperature() {
+    # Get the list of connected displays
+    displays=$(xrandr | grep " connected" | awk '{print $1}')
+
+    # Loop through each display and adjust color temperature
+    for display in $displays; do
+        xrandr --output $display --gamma 1:0.7:0.1 --brightness 1
+    done
+}
+
+# Function to restore original display settings
+restore_settings() {
+    # Get the list of connected displays
+    displays=$(xrandr | grep " connected" | awk '{print $1}')
+
+    # Loop through each display and restore original settings
+    for display in $displays; do
+        xrandr --output $display --gamma 1:1:1 --brightness 1
+    done
+}
+
+# Main function
+main() {
+    # Check if arguments are provided
+    if [ $# -ne 3 ]; then
+        echo "Usage: $0 <start_time> <end_time> <interval_minutes>"
+        echo "Example: $0 21:00 07:00 30"
+        exit 1
+    fi
+
+    start_time=$1
+    end_time=$2
+    interval=$3
+
+    # Loop indefinitely
+    while true; do
+        current_time=$(date +%H:%M)
+
+        # Check if current time is within the specified range
+        if [[ "$current_time" > "$start_time" && "$current_time" < "$end_time" ]]; then
+            echo "Adjusting color temperature..."
+            adjust_color_temperature
+        else
+            echo "Restoring original settings..."
+            restore_settings
+        fi
+        
+        total_seconds=$((interval * 60))
+        sleep $total_seconds
+    done
+}
+
+# Start the main function with command-line arguments
+main "$@"
+
