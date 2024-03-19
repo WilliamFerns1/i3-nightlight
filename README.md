@@ -21,7 +21,7 @@ To install Nightlight, follow these steps:
 3. Move the script to `/usr/local/bin` using sudo:
 
     ```bash
-    sudo mv nightlight.sh /usr/local/bin/nightlight
+    sudo mv nightlight /usr/local/bin/nightlight
     ```
 
 4. Create a symbolic link for easier access:
