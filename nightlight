@@ -7,7 +7,7 @@ adjust_color_temperature() {
 
     # Loop through each display and adjust color temperature
     for display in $displays; do
-        xrandr --output $display --gamma 1:0.7:0.1 --brightness 1
+        xrandr --output $display --gamma 1:0.7:0.1 --brightness 0.7
     done
 }
 
@@ -43,9 +43,6 @@ main() {
         if [[ "$current_time" > "$start_time" && "$current_time" < "$end_time" ]]; then
             echo "Adjusting color temperature..."
             adjust_color_temperature
-        else
-            echo "Restoring original settings..."
-            restore_settings
         fi
         
         total_seconds=$((interval * 60))
