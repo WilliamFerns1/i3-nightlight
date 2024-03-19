@@ -18,10 +18,10 @@ To install Nightlight, follow these steps:
     cd i3-nightlight
     ```
 
-3. Move the script to `/usr/local/bin` using sudo:
+3. Move the script to `/usr/bin` using sudo:
 
     ```bash
-    sudo mv nightlight /usr/local/bin/nightlight
+    sudo mv nightlight /usr/bin/nightlight
     ```
 
 4. Add the following line to your i3 configuration file (`~/.config/i3/config`):
